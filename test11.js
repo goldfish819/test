@@ -1,33 +1,33 @@
 // server
-var http = require("http");
-var url = require("url");
+var express = require("express"),
+   http = require('http'),
+   app = express(),
+   server = http.createServer(app);
+   
+app.get('/',function (req, res){
+    res.send('Hello');
+});
 
-http.createServer(function (request, response){
-        response.writeHead(200, {"Content-Type" : "text/plain"});
-        response.write("Hello World");
-        response.end();
-}).listen(8080);
-console.log("Server stared");
+app.get('world.html', function (req, res){
+    res.send('Hello World');
+});
 
+server.listen(8080, function(){
+    console.log('aaa' + server.address().port);
+});
+   
+   
+   
+   
+   
+   
+   
+// var http = require("http");
+// var url = require("url");
 
-
-function start(route){
-function onRequest(request, response) {
-var pathname = url.parse(request.url).pathname;
-    console.log("Request for "+pathname+"Received");
-    route(pathname);
-    response.writeHead(200, {"Content-Type" : "text/plain"});
-        response.write("Hello World");
-        response.end();
-}
-http.createServer(onRequest).listen(8080);
-console.log("Server has stared");
-}
-exports.start = start;
-
-
-function route(pathname){
-    console.log("About to route a request for" + pathname);
-}
-
-exports.route = route;
+// http.createServer(function (request, response){
+//         response.writeHead(200, {"Content-Type" : "text/plain"});
+//         response.write("Hello World");
+//         response.end();
+// }).listen(8080);
+// console.log("Server stared");
