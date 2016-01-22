@@ -19,5 +19,5 @@ app.get('/test/json', function(req,res) {
 })
 
 server.listen(8000, function() {
-	console.log('listen: ' + 8000);
+	console.log('listen: ' + 8000)
 })
