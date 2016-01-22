@@ -1,0 +1,25 @@
+{
+  "name": "test1",
+  "version": "0.0.1",
+  "description": "test1",
+  "main": "app.js",
+  "scripts": {
+    "test": "node app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/goldfish819/test.git"
+  },
+  "keywords": [
+    "test1"
+  ],
+  "author": "goldfish819",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/goldfish819/test/issues"
+  },
+  "homepage": "https://github.com/goldfish819/test#readme",
+  "dependencies": {
+    "express": "^4.13.4"
+  }
+}
