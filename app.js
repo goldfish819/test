@@ -10,7 +10,7 @@ app.get('/', function(req, res) {
     console.log('!!!');
 	res.send('aaaa');
 })
-app.use('/',require('./test11'))
+// app.use('/',require('./test11'))
 app.get('/test', function(req, res) {
     console.log('test')
     res.send('test')

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<head>
+    <title>chat.html</title>
+</head>
+<body>
+    
+    <button onclick="create();">create</button>
+    
+    <div id="list" style="border: 1px solid red;width:40%;height: 500px;float:left;"></div>
+    <div id="chatt" style="border: 1px solid blue;width:40%;height: 500px;float:left;">
+    </div>
+    
+    
+    
+<script>
+    function create(){
+        var chatdiv = document.createElement('div');
+        chatdiv.setAttribute('style','width:80%;height:150px;border: 1px solid green;')
+        chatdiv.innerHTML='채팅방이 생성되었습니다.';
+        var enterbtn = document.createElement('button');
+        enterbtn.innerHTML='입장';
+        enterbtn.setAttribute('onclick','enter();');
+        chatdiv.appendChild(enterbtn);
+        document.getElementById('list').appendChild(chatdiv);
+    }
+    function enter(){
+        var chatt = document.getElementById('chatt');
+        chatt.innerHTML='';
+        var text = document.createElement('input');
+        text.setAttribute('type','text');
+        var submitt = document.createElement('button');
+        submitt.innerHTML='작성';
+        chatt.appendChild(text);
+        chatt.appendChild(submitt);
+    }
+</script>    
+</body>
