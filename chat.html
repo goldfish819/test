@@ -4,40 +4,86 @@
     <title>chat.html</title>
 </head>
 <body>
-    <script src="/socket.io/socket.io.js"></script>
+    <!--<script src="/socket.io/socket.io.js"></script>-->
+    <script src="https://cdn.socket.io/socket.io-1.2.0.js"></script>
+    <script src="http://code.jquery.com/jquery-1.11.1.js"></script>
     <button onclick="create();">create</button>
     
     <div id="list" style="border: 1px solid red;width:40%;height: 500px;float:left;"></div>
-    <div id="chatt" style="border: 1px solid blue;width:40%;height: 500px;float:left;">
+    <div style="border: 1px solid blue;width:40%;height: 500px;float:left;">
+         <div id="chatt" style="border: 1px solid yellow;width: 90%;height: 400px;"></div>
+         <form action="" style="margin-top:20%;">
+             <input type="text" id="text"><button>작성</button>
+         </form>
     </div>
     
     
     
 <script>
+    var socket = io();
+    
     function create(){
         var chatdiv = document.createElement('div');
         chatdiv.setAttribute('style','width:80%;height:150px;border: 1px solid green;')
         chatdiv.innerHTML='채팅방이 생성되었습니다.';
         var enterbtn = document.createElement('button');
         enterbtn.innerHTML='입장';
-        enterbtn.setAttribute('onclick','enter();');
+        
+        var len = $('.chatgroup').length;
+        console.log(len);
+        if(len == 0){
+            chatdiv.setAttribute('id','1');
+            enterbtn.setAttribute('onclick','enter(1);');
+        }else{
+            chatdiv.setAttribute('id',len+1);
+            enterbtn.setAttribute('onclick','enter('+(len+1)+');');
+        }
+        chatdiv.setAttribute('class','chatgroup');
         chatdiv.appendChild(enterbtn);
-        document.getElementById('list').appendChild(chatdiv);
+        socket.emit('create group', chatdiv);return false;
+        socket.on('create group', function(chatdiv){
+            $('#list').append(chatdiv);
+        })
     }
-    function enter(){
-        var chatt = document.getElementById('chatt');
-        chatt.innerHTML='';
-        var form = document.createElement('form');
-        var text = document.createElement('input');
-        text.setAttribute('type','text');
-        text.setAttribute('id','text');
-        var submitt = document.createElement('button');
-        submitt.innerHTML='작성';
-        form.appendChild(text);
-        form.appendChild(submitt);
-        chatt.appendChild(form);
-    }
+    // function enter(){
+    //     var chatt = document.getElementById('chatt');
+    //     chatt.innerHTML='';
+    //     var form = document.createElement('form');
+    //     form.setAttribute('action','');
+    //     var text = document.createElement('input');
+    //     text.setAttribute('type','text');
+    //     text.setAttribute('id','text');
+    //     var submitt = document.createElement('button');
+    //     submitt.setAttribute('id','submitt');
+    //     submitt.innerHTML='작성';
+    //     form.appendChild(text);
+    //     form.appendChild(submitt);
+    //     chatt.appendChild(form);
+    // }
     
-    var socket = io();
+    function enter(){
+        document.getElementById('chatt').innerHTML='';
+        
+        $('form').submit(function(){
+            var textt = $('#text').val();
+                socket.emit('chat message',textt);
+            $('#text').val('');
+            return false;
+        });
+        socket.on('chat message', function(msg){
+            $('#chatt').append($('<div>').text(msg));
+        });
+    }
+
+    // var socket = io();
+    // $('form').submit(function(){
+    //      var textt = $('#text').val();
+    //          socket.emit('chat message',textt);
+    //      $('#text').val('');
+    //     return false;
+    // });
+    // socket.on('chat message', function(msg){
+    //     $('#chatt').append($('<div>').text(msg));
+    // });
 </script>    
 </body>
