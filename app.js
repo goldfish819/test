@@ -1,8 +1,10 @@
- var express = require("express");
+var express = require("express");
 var app = express();
 var http = require('http');
 var server = http.createServer(app);
 var fs = require('fs');
+var io = require('socket.io')(http);
+
 
 app.use('/public', express.static('public'))
 
@@ -28,6 +30,14 @@ app.get('/test/:name', function(req,res) {
     })
 })*/
 
-server.listen(8000, function() {
-	console.log('listen: ' + 8000)
+app.get('/chat', function (req, res) {
+    res.sendFile(__dirname+'/chat.html');
+});
+
+io.on('connection',function (socket) {
+    console.log('a user connected');
+});
+
+server.listen(3000, function() {
+	console.log('listening on: 3000');
 })

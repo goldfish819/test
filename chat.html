@@ -4,7 +4,7 @@
     <title>chat.html</title>
 </head>
 <body>
-    
+    <script src="/socket.io/socket.io.js"></script>
     <button onclick="create();">create</button>
     
     <div id="list" style="border: 1px solid red;width:40%;height: 500px;float:left;"></div>
@@ -27,12 +27,17 @@
     function enter(){
         var chatt = document.getElementById('chatt');
         chatt.innerHTML='';
+        var form = document.createElement('form');
         var text = document.createElement('input');
         text.setAttribute('type','text');
+        text.setAttribute('id','text');
         var submitt = document.createElement('button');
         submitt.innerHTML='작성';
-        chatt.appendChild(text);
-        chatt.appendChild(submitt);
+        form.appendChild(text);
+        form.appendChild(submitt);
+        chatt.appendChild(form);
     }
+    
+    var socket = io();
 </script>    
 </body>
