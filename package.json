@@ -21,6 +21,7 @@
   "homepage": "https://github.com/goldfish819/test#readme",
   "dependencies": {
     "express": "^4.13.4",
+    "sessionstorage": "0.0.1",
     "socket.io": "^1.4.5"
   }
 }
