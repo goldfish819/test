@@ -60,40 +60,38 @@ io.on('connection', function (socket) {
 
 //join
 io.on('connection',function (socket) {
-    socket.on('join group', function (num) {
-        //if(localStorage.getItem('roomNum') === null){
-        if(sessionStorage.length == 0){
+    socket.on('join group', function (num,ss) {
+        if(ss === null){
             socket.join(num);
+            socket.emit('store', num);
             console.log(num+'번방');
-            //localStorage.setItem('roomNum',num);
-            sessionStorage.setItem('roomNum',num);
-            
         }else{
-            // socket.leave(localStorage.getItem('roomNum'));
-            // console.log('leave: '+localStorage.getItem('roomNum'));
-            socket.leave(sessionStorage.getItem('roomNum'));
-            console.log('leave: '+sessionStorage.getItem('roomNum'));
+            socket.leave(ss);
+            console.log('leave: '+ss);
             socket.join(num);
             console.log(num+'번방');
-            //localStorage.setItem('roomNum',num);
-            sessionStorage.setItem('roomNum',num);
+            socket.emit('store', num);
         }
     });
 });
 
 //message
 io.on('connection', function (socket) {
-    socket.on('chat message', function (name,msg) {
+    socket.on('chat message', function (name,msg,ss) {
         // console.log('message:'+ msg);
         // io.emit('chat message', msg);
         // io.sockets.in(localStorage.getItem('roomNum')).emit('chat message', name, msg);
         // console.log('roomnum: '+localStorage.getItem('roomNum')+' /text: '+msg);
-        io.sockets.in(sessionStorage.getItem('roomNum')).emit('chat message', name, msg);
-        console.log('roomnum: '+sessionStorage.getItem('roomNum')+' /text: '+msg);
+        io.sockets.in(ss).emit('chat message', name, msg);
+        console.log('roomnum: '+ss+' /text: '+msg);
     });
 });
 
-
+//connection status
+// console.log('check 1', socket.connected);
+// socket.on('connect', function() {
+//   console.log('check 2', socket.connected);
+// });
 
 http.listen(3000, function() {
 	console.log('listening on: 3000');

@@ -9,8 +9,8 @@
     <script src="http://code.jquery.com/jquery-1.11.1.js"></script>
     <button onclick="create();" id="create">create</button>
     
-    <div id="list" style="border: 1px solid red;width:40%;height: 500px;float:left;"></div>
-    <div style="border: 1px solid blue;width:40%;height: 500px;float:left;">
+    <div id="list" style="border: 1px solid red;width:20%;height: 500px;float:left;"></div>
+    <div style="border: 1px solid blue;width:20%;height: 500px;float:left;">
          <div id="chatt" style="border: 1px solid yellow;width: 100%;height: 400px;"></div>
          <form action="" >
              <input type="text" id="name" placeholder="nickname">
@@ -65,15 +65,19 @@
     
     function enter(num){
         document.getElementById('chatt').innerHTML='';
-        
-        socket.emit('join group',num);
+        var ss = sessionStorage.getItem('roomNum');
+        socket.emit('join group',num,ss);
     }
     
+    socket.on('store', function(num){
+        sessionStorage.setItem('roomNum',num);
+    });
     
     $('form').submit(function(){
         var name = $('#name').val();
         var textt = $('#text').val();
-        socket.emit('chat message', name, textt);
+        var ss = sessionStorage.getItem('roomNum');
+        socket.emit('chat message', name, textt, ss);
         $('#text').val('');
         return false;
     });
