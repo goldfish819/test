@@ -36,6 +36,10 @@ app.get('/chat', function (req, res) {
     res.sendFile(__dirname+'/chat.html');
 });
 
+app.get('/react', function (req, res) {
+    res.sendFile(__dirname+'/react.html');
+});
+
 io.on('connection',function (socket) {
     console.log('a user connected');
     socket.on('disconnect',function () {
