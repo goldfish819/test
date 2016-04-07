@@ -4,14 +4,11 @@ var http = require('http').Server(app);
 // var server = http.createServer(app);
 // var fs = require('fs');
 var io = require('socket.io')(http);
-var localStorage = require('localStorage');
-var sessionStorage = require('sessionstorage');
-
 
 app.use('/public', express.static('public'))
 
 app.get('/', function(req, res) {
-    console.log('!!!');
+    //console.log('!!!');
 	res.send('aaaa');
 })
 // app.use('/',require('./test11'))
@@ -38,6 +35,10 @@ app.get('/chat', function (req, res) {
 
 app.get('/react', function (req, res) {
     res.sendFile(__dirname+'/react.html');
+});
+
+app.get('/issue', function (req, res) {
+    res.sendFile(__dirname+'/issueEdit.html');
 });
 
 io.on('connection',function (socket) {

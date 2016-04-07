@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<head>
+    <title>issueEdit.html</title>
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+    <style>
+        .bulletin-app-image {
+            padding: 10px;
+            border: 1px dotted gray;
+            text-align: center;
+            cursor: pointer;
+            width: 40%;
+        }
+    </style>
+</head>
+<body>
+<button id="update" class="btn btn-primary">update</button>
+<div id="add-bulletin-app-modal" class="modal fade" tabindex="-1">
+<div class="modal-dialog modal-md">
+    <div class="modal-content">
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+        <h4 class="modal-title">앱 공지사항</h4>
+    </div>
+    <div class="modal-body">
+		<div class="canvas" style="float:left;width:300px;height:300px;border: 1px solid green;">
+			<div class="main-canvas"></div><hr>
+            <div class="content-canvas"></div>
+		</div>
+		<div class="palett">
+            <ul class="nav nav-tabs">
+                <li class="active"><a data-toggle="tab" href="#main">메인</a></li>
+                <li><a data-toggle="tab" href="#content">컨텐츠</a></li>
+            </ul>
+            <div class="tab-content">
+            <div id="main" class="tab-pane fade in active">
+                <input type="text" name="subject" placeholder="제목">
+                <div id="bulletin-app-image-main" class="bulletin-app-image"></br>업로드 할 이미지를 <strong>드래그앤드랍</strong>해주세요.
+                <input type="file" id="main-image" data-type="bulletinAppMainImageFile" style="display: inline"/>
+                <div class="image-container" style="border:1px solid red;"><img/></div>
+                </div>
+                <div><span class="togglebutton"><label>활성화<input id="bulletin-app-status" type="checkbox"></label></span></div>
+                <h5>액션종류</h5>
+                <select style="display:block;">
+                    <option value="toContent">컨텐츠화면으로 이동</option>
+                    <option value="toStore">매장으로</option>
+                    <option value="toStorelist">매장리스트로</option>
+                </select>
+                <input type="text" name="parameter" placeholder="파라미터">
+            </div>
+            <div id="content" class="tab-pane fade">
+                <h3>Menu 1</h3>
+                <p>Some content in menu 1.</p>
+            </div>
+            </div>
+		</div>
+    </div>
+    <div class="modal-footer">
+        <button id='delete-bulletin-app' class="btn btn-danger" >삭제</button>
+        <button id='update-bulletin-app' class="btn btn-primary" >수정하기</button>
+        <button id='cancel-bulletin-app' class="btn btn-primary" data-dismiss="modal">취소</button>
+    </div>
+    </div>
+</div>
+</div>
+
+<script>
+    $('#update').on('click', function(){
+        $('#add-bulletin-app-modal').modal('show');
+    });
+    $('#main-image').on('change',function() {
+        console.log(this.value);
+        $('.image-container img').attr('src',this.value);
+    });
+</script>
+</body>
