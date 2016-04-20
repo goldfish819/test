@@ -5,7 +5,7 @@
     <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
     <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
-    <script type="text/javascript" src="/public/javascripts/aaa.js"></script>
+    <script type="text/javascript" src="/public/javascripts/issueEdit.js"></script>
     <style>
         .bulletin-app-image {
             padding: 10px;
@@ -14,6 +14,85 @@
             cursor: pointer;
             width: 40%;
         }
+        /*HTML  CSS  JS  Result
+Edit on */
+/* canvas styles */
+html, body
+{
+    font:normal normal normal 100%/1.4 tahoma, sans-serif;
+    background:#f9f9f9;
+    color:#000;
+}
+body
+{
+    font-size:0.8em;
+}
+
+/* draggable targets */
+[data-draggable="target"]
+{
+    float:left;
+    list-style-type:none;
+    
+    width:42%;
+    height:7.5em;
+    overflow-y:auto;
+    
+    margin:0 0.5em 0.5em 0;
+    padding:0.5em;
+    
+    border:2px solid #888;
+    border-radius:0.2em;
+    
+    background:#ddd;
+    color:#555;
+}
+
+/* drop target state */
+[data-draggable="target"][aria-dropeffect="move"]
+{
+    border-color:#68b;
+
+    background:#fff;
+}
+
+/* drop target focus and dragover state */
+[data-draggable="target"][aria-dropeffect="move"]:focus,
+[data-draggable="target"][aria-dropeffect="move"].dragover
+{
+    outline:none;
+    
+    box-shadow:0 0 0 1px #fff, 0 0 0 3px #68b;
+}
+
+/* draggable items */
+[data-draggable="item"]
+{
+    display:block;
+    list-style-type:none;
+    
+    margin:0 0 2px 0;
+    padding:0.2em 0.4em;
+    
+    border-radius:0.2em;
+    
+    line-height:1.3;
+}
+
+/* items focus state */
+[data-draggable="item"]:focus
+{
+    outline:none;
+    
+    box-shadow:0 0 0 2px #68b, inset 0 0 0 1px #ddd;
+}
+
+/* items grabbed state */
+[data-draggable="item"][aria-grabbed="true"]
+{
+    background:#8ad;
+    color:#fff;
+}
     </style>
 </head>
 <body>
@@ -45,9 +124,9 @@
                 <div><span class="togglebutton"><label>활성화<input id="bulletin-app-status" type="checkbox"></label></span></div>
                 <h5>액션종류</h5>
                 <select style="display:block;">
-                    <option value="toContent">컨텐츠화면으로 이동</option>
-                    <option value="toStore">매장으로</option>
-                    <option value="toStorelist">매장리스트로</option>
+                    <option value="1">컨텐츠화면으로 이동</option>
+                    <option value="2">매장으로</option>
+                    <option value="3">매장리스트로</option>
                 </select>
                 <input type="text" name="parameter" placeholder="파라미터">
             </div>
@@ -66,6 +145,27 @@
     </div>
 </div>
 </div>
+
+<ol data-draggable="target">
+      <li data-draggable="item">Item 0</li>
+    <li data-draggable="item">Item 1</li>
+    <li data-draggable="item">Item 2</li>
+      <li data-draggable="item">Item 3</li>
+</ol>
+
+<ol data-draggable="target">
+      <li data-draggable="item">Item 4</li>
+      <li data-draggable="item">Item 5</li>
+</ol>
+
+<ol data-draggable="target">
+      <li data-draggable="item">Item 6</li>
+      <li data-draggable="item">Item 7</li>
+</ol>
+
+<ol data-draggable="target">
+      <li data-draggable="item">Item 8</li>
+</ol>
 
 <script>
     $('#update').on('click', function(){
