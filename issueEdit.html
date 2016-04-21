@@ -4,6 +4,7 @@
     <title>issueEdit.html</title>
     <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+    <script src="http://code.jquery.com/ui/1.11.4/jquery-ui.min.js"></script>
     <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
     <script type="text/javascript" src="/public/javascripts/issueEdit.js"></script>
     <style>
@@ -14,85 +15,13 @@
             cursor: pointer;
             width: 40%;
         }
-        /*HTML  CSS  JS  Result
-Edit on */
-/* canvas styles */
-html, body
-{
-    font:normal normal normal 100%/1.4 tahoma, sans-serif;
-    background:#f9f9f9;
-    color:#000;
-}
-body
-{
-    font-size:0.8em;
-}
-
-/* draggable targets */
-[data-draggable="target"]
-{
-    float:left;
-    list-style-type:none;
-    
-    width:42%;
-    height:7.5em;
-    overflow-y:auto;
-    
-    margin:0 0.5em 0.5em 0;
-    padding:0.5em;
-    
-    border:2px solid #888;
-    border-radius:0.2em;
-    
-    background:#ddd;
-    color:#555;
-}
-
-/* drop target state */
-[data-draggable="target"][aria-dropeffect="move"]
-{
-    border-color:#68b;
-
-    background:#fff;
-}
-
-/* drop target focus and dragover state */
-[data-draggable="target"][aria-dropeffect="move"]:focus,
-[data-draggable="target"][aria-dropeffect="move"].dragover
-{
-    outline:none;
-    
-    box-shadow:0 0 0 1px #fff, 0 0 0 3px #68b;
-}
-
-/* draggable items */
-[data-draggable="item"]
-{
-    display:block;
-    list-style-type:none;
-    
-    margin:0 0 2px 0;
-    padding:0.2em 0.4em;
-    
-    border-radius:0.2em;
-    
-    line-height:1.3;
-}
-
-/* items focus state */
-[data-draggable="item"]:focus
-{
-    outline:none;
-    
-    box-shadow:0 0 0 2px #68b, inset 0 0 0 1px #ddd;
-}
-
-/* items grabbed state */
-[data-draggable="item"][aria-grabbed="true"]
-{
-    background:#8ad;
-    color:#fff;
-}
+        #sortable { list-style-type: none; margin: 0; padding: 0; width: 100%; }
+        #sortable li { margin: 0 3px 3px 3px; padding: 0.4em; padding-left: 1.5em; font-size: 1.4em; height: 18px; }
+        #sortable li span { position: absolute; margin-left: -1.3em; }
+        
+        ul#sortable li {
+            display: inline;
+        }
     </style>
 </head>
 <body>
@@ -146,26 +75,15 @@ body
 </div>
 </div>
 
-<ol data-draggable="target">
-      <li data-draggable="item">Item 0</li>
-    <li data-draggable="item">Item 1</li>
-    <li data-draggable="item">Item 2</li>
-      <li data-draggable="item">Item 3</li>
-</ol>
-
-<ol data-draggable="target">
-      <li data-draggable="item">Item 4</li>
-      <li data-draggable="item">Item 5</li>
-</ol>
-
-<ol data-draggable="target">
-      <li data-draggable="item">Item 6</li>
-      <li data-draggable="item">Item 7</li>
-</ol>
-
-<ol data-draggable="target">
-      <li data-draggable="item">Item 8</li>
-</ol>
+<ul id="sortable">
+  <li>ul > list > div > img</li>
+  <li>list2</li>
+  <li>list3</li>
+  <li>list4</li>
+  <li>list5</li>
+  <li>list6</li>
+  <li>list7</li>
+</ul>
 
 <script>
     $('#update').on('click', function(){
@@ -174,6 +92,10 @@ body
     $('#main-image').on('change',function() {
         console.log(this.value);
         $('.image-container img').attr('src',this.value);
+    });
+    $(function() {
+        $( "#sortable" ).sortable();
+        $( "#sortable" ).disableSelection();
     });
 </script>
 </body>
