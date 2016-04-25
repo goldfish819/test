@@ -4,6 +4,8 @@ var http = require('http').Server(app);
 // var server = http.createServer(app);
 // var fs = require('fs');
 var io = require('socket.io')(http);
+var request = require('request');
+module.exports = request;
 
 app.use('/public', express.static('public'))
 

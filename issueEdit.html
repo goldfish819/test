@@ -84,8 +84,11 @@
   <li>list6</li>
   <li>list7</li>
 </ul>
+<input type="text" id="url"><button id="go"> gogo</button>
+<div id="ff"></div>
 
 <script>
+    
     $('#update').on('click', function(){
         $('#add-bulletin-app-modal').modal('show');
     });
@@ -96,6 +99,19 @@
     $(function() {
         $( "#sortable" ).sortable();
         $( "#sortable" ).disableSelection();
+    });
+    
+    $(document).ready(function(){
+       var url = 'https://api.instagram.com/oembed/?url=https://www.instagram.com/p/BEfTnZeOyu8/';
+       
+       $.ajax({
+           url: url,
+           dataType: 'jsonp',
+           cache: false,
+           success: function(response){
+               console.log(response);
+           }
+       });
     });
 </script>
 </body>
