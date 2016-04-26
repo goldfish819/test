@@ -5,7 +5,7 @@ var http = require('http').Server(app);
 // var fs = require('fs');
 var io = require('socket.io')(http);
 var request = require('request');
-module.exports = request;
+var cheerio = require('cheerio');
 
 app.use('/public', express.static('public'))
 
@@ -42,6 +42,32 @@ app.get('/react', function (req, res) {
 app.get('/issue', function (req, res) {
     res.sendFile(__dirname+'/issueEdit.html');
 });
+
+var options = {
+        url: 'http://m.blog.naver.com/wouldu_coffee/220681445982',
+        headers: {
+          'User-Agent': 'Mozilla/5.0 (iPhone; CPU iPhone OS 8_0 like Mac OS X) AppleWebKit/600.1.3 (KHTML, like Gecko) Version/8.0 Mobile/12A4345d Safari/600.1.4'
+        }
+      };
+
+var url = 'http://m.blog.naver.com/PostView.nhn?blogId=taijilll&logNo=220692271980';
+request(options, function(error, response, html){
+if (error) {throw error};
+var $ = cheerio.load(html);
+var a = $('#_post_property')[0].attribs.uri;
+
+var s = a.indexOf(':');
+
+var ss = a.substring(0, a.indexOf(':'));
+
+var aa = typeof a;
+//var a = typeof $;
+console.log(aa);
+console.log(ss);
+
+});
+              
+
 
 io.on('connection',function (socket) {
     console.log('a user connected');

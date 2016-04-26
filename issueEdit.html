@@ -100,18 +100,12 @@
         $( "#sortable" ).sortable();
         $( "#sortable" ).disableSelection();
     });
-    
-    $(document).ready(function(){
-       var url = 'https://api.instagram.com/oembed/?url=https://www.instagram.com/p/BEfTnZeOyu8/';
        
-       $.ajax({
-           url: url,
-           dataType: 'jsonp',
-           cache: false,
-           success: function(response){
-               console.log(response);
-           }
-       });
-    });
+    //    $.get('/instagram').done(function(html) {
+    //         console.log(html);
+    //     }).fail(function(data) {
+    //         alert(data);
+    //     });
+        
 </script>
 </body>
