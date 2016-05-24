@@ -22,6 +22,35 @@
         ul#sortable li {
             display: inline;
         }
+        
+        @keyframes example1 {
+            0%   {left:0px; top:0px;}
+            /*25%  {left:200px; top:0px;}
+            50%  {left:200px; top:200px;}
+            75%  {left:0px; top:200px;}*/
+            100% {left:30%; top:0px;}
+        }
+        
+        @keyframes fade {
+            0% { opacity: 0.1; }
+            /*20% { opacity: 0; }*/
+            40% { opacity: 0.3; }
+            60% { opacity: 0.5; }
+            80% { opacity: 0.9; }
+            100% { opacity: 1; }
+        }
+        
+        #ani {
+            left: 30%;
+            position: relative;
+            animation-name: example1;
+            animation-duration: 1s;
+        }
+        
+        #opacity {
+            animation-name: fade;
+            animation-duration: 1s;
+        }
     </style>
 </head>
 <body>
@@ -85,8 +114,10 @@
   <li>list7</li>
 </ul>
 <input type="text" id="url"><button id="go"> gogo</button>
-<div id="ff"></div>
+<a id="ff"></a>
 
+<div id="ani" style="width: 100px; height: 100px;border: 1px solid red;"></div>
+<div id="opacity" style="width: 100px; height: 100px; background-color: blue;"></div>
 <script>
     
     $('#update').on('click', function(){
@@ -106,6 +137,5 @@
     //     }).fail(function(data) {
     //         alert(data);
     //     });
-        
 </script>
 </body>

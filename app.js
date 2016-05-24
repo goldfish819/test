@@ -44,7 +44,8 @@ app.get('/issue', function (req, res) {
 });
 
 var options = {
-        url: 'http://m.blog.naver.com/wouldu_coffee/220681445982',
+        //url: 'http://m.blog.naver.com/lllsoulll/220442614753',
+        url: 'http://m.blog.naver.com/blackeyescat/220666633703',
         headers: {
           'User-Agent': 'Mozilla/5.0 (iPhone; CPU iPhone OS 8_0 like Mac OS X) AppleWebKit/600.1.3 (KHTML, like Gecko) Version/8.0 Mobile/12A4345d Safari/600.1.4'
         }
@@ -54,17 +55,35 @@ var url = 'http://m.blog.naver.com/PostView.nhn?blogId=taijilll&logNo=2206922719
 request(options, function(error, response, html){
 if (error) {throw error};
 var $ = cheerio.load(html);
-var a = $('#_post_property')[0].attribs.uri;
+console.log(html);
+//var a = $('#_post_property')[0].attribs;
 
-var s = a.indexOf(':');
+var a = $('img')[1].attribs.src;
+var b = $('span');
+var arr = [];
+if(a.slice(7,11) == 'mblo'){
+    console.log('yes');
+    a = $('img')[1].attribs.src;
+}else{
+    console.log('no');
+    for(var i=0;i<b.length;i++){
+        if(b[i].attribs.thumburl){
+        arr.push(b[i].attribs.thumburl+'w2'); 
+    }
+    }
+    //console.log(arr);
+    a = arr[10];
+}
+// a.slice(a.indexOf('?')-3, a.indexOf('?')) == 'png' || a.slice(7,11) == 'mash' || a.slice(7,11) == 'blog'
+//var s = a.indexOf(':');
 
-var ss = a.substring(0, a.indexOf(':'));
+//var ss = a.substring(0, a.indexOf(':'));
 
-var aa = typeof a;
+//var aa = typeof a;
 //var a = typeof $;
-console.log(aa);
-console.log(ss);
-
+//console.log(aa);
+console.log(a);
+//console.log(b);
 });
               
 
