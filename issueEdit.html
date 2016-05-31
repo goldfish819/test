@@ -118,9 +118,12 @@
 
 <div id="ani" style="width: 100px; height: 100px;border: 1px solid red;"></div>
 <div id="opacity" style="width: 100px; height: 100px; background-color: blue;"></div>
-<div id="bubble" style="width:300px;height:300px;border: 1px solid red;"></div>
 
 <div id="outlook" style="width: 100px; height: 100px; border: 1px solid blue"></div>
+
+<div style="border: 1px solid black; width: 2px; height: 50px; margin-left: 10%"></div>
+<div style="border: 2px solid deeppink; width: 5%; height: 2px; margin-left: 10%;"></div>
+<div><img src="/img_sample/01.jpg"/></div>
 <script>
     
     $('#update').on('click', function(){
@@ -133,52 +136,6 @@
     $(function() {
         $( "#sortable" ).sortable();
         $( "#sortable" ).disableSelection();
-    });
-    
-    var arr = [01,02,03,04,05,06,07,08];
-    
-    arr.forEach(function(value){
-        var dot = $('<div></div');
-        dot.attr('class','dot').css('border-radius','10px').css('width','15px')
-        .css('height','15px').css('border','1px solid red');
-        
-        var ww = Math.floor((Math.random()*90) +1);
-        var hh = Math.floor((Math.random()*15) +1);
-        dot.css('margin-left',ww+'%').css('margin-top',hh+'%');
-        $('#bubble').append(dot);
-    });
-    var ar = $('.dot');
-    // console.log(ar[0].style.marginLeft);
-    $(function animation(){
-        var option = {
-            duration: 1000,
-            easing: 'linear'
-        };
-        var aa = (ar[0].style.marginLeft).substring(0, (ar[0].style.marginLeft).length-1);
-        var bb = (ar[0].style.marginTop).substring(0, (ar[0].style.marginLeft).length-1);
-        
-        $('#bubble').find('.dot').animate({
-            marginLeft: aa,
-            marginTop: bb
-        },
-        // option).animate({
-        //     marginLeft: aa,
-        //     marginTop: bb+1
-        // },
-        option).animate({
-            marginLeft: aa,
-            marginTop: bb+3
-        },
-        option).animate({
-            marginLeft: aa,
-            marginTop: bb
-        },
-        $.extend(true, {}, option, {
-            complete: function(){
-                animation();
-            }
-        })
-        );
     });
         
     //email - outlook
